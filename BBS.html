@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Ball Simulation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black; /* Set the background color to black */
+        }
+
+        .simulation {
+            width: 100vw; /* Take up the full width of the viewport */
+            height: 100vh; /* Take up the full height of the viewport */
+            border: 2px solid white; /* White border for visibility on black background */
+            position: relative;
+        }
+
+        .ball {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="simulation" id="simulation">
+        <div class="ball" id="ball"></div>
+    </div>
+
+    <script>
+        // JavaScript code remains the same as in the previous snippet
+        const simulation = document.getElementById('simulation');
+        const ball = document.getElementById('ball');
+
+        let ballX = window.innerWidth / 2 - 10;
+        let ballY = window.innerHeight / 2 - 10;
+        let ballSpeedX = 2;
+        let ballSpeedY = -2;
+
+        function updateBallPosition() {
+            ballX += ballSpeedX;
+            ballY += ballSpeedY;
+
+            if (ballX <= 0 || ballX >= window.innerWidth - 20) {
+                ballSpeedX = -ballSpeedX;
+                ball.style.backgroundColor = 'blue';
+            }
+
+            if (ballY <= 0 || ballY >= window.innerHeight - 20) {
+                ballSpeedY = -ballSpeedY;
+                ball.style.backgroundColor = 'green';
+            }
+
+            ball.style.left = ballX + 'px';
+            ball.style.top = ballY + 'px';
+        }
+
+        simulation.addEventListener('click', (event) => {
+            ballX = event.clientX - 10;
+            ballY = event.clientY - 10;
+            ball.style.left = ballX + 'px';
+            ball.style.top = ballY + 'px';
+            ball.style.backgroundColor = 'red';
+        });
+
+        setInterval(updateBallPosition, 20);
+    </script>
+</body>
+
+</html>
